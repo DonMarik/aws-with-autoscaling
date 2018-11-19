@@ -64,8 +64,8 @@ resource "aws_security_group" "WebserverSG"
         from_port = "${var.server_port}"
         to_port = "${var.server_port}"
         protocol = "TCP"
-        cidr_blocks = ["${var.mgmt_ips}"]
-        #security_groups = ["${aws_security_group.bastionhostSG.id}"]
+        #cidr_blocks = ["${var.mgmt_ips}"]
+        security_groups = ["${aws_security_group.LoadBalancerSG.id}"]
         description = "Allow incoming SSH traffic"
     }
     ingress {
