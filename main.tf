@@ -62,7 +62,7 @@ resource "aws_security_group" "instance" {
   }
 }
 
-resource "aws_launch_configuration" "ma_ec2_webserver" {
+resource "aws_launch_configuration" "ec2-webserver" {
   image_id = "${lookup(var.aws_amis, var.region)}"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.ma-keypair.key_name}"
@@ -80,7 +80,7 @@ resource "aws_launch_configuration" "ma_ec2_webserver" {
 }
 
 resource "aws_autoscaling_group" "ma_ec2_webserver" {
-  launch_configuration = "ma_ec2_webserver"
+  launch_configuration = "ec2-webserver"
   #availability_zones = ["${data.aws_availability_zones.all.names}"]
   #obsolete availability_zones = ["eu-central-1a", "eu-central-1b"]
   vpc_zone_identifier = ["${aws_subnet.pub-web-az-a.id}", "${aws_subnet.pub-web-az-b.id}"]
