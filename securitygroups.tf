@@ -5,7 +5,6 @@ resource "aws_security_group" "LoadBalancerSG"
     name = "LoadBalancerSG"
     vpc_id = "${aws_vpc.ma-vpc-eu-1.id}"
     description = "Security group for load-balancers"
-    
     ingress {
         from_port = 80
         to_port = 80
@@ -13,7 +12,6 @@ resource "aws_security_group" "LoadBalancerSG"
         cidr_blocks = ["0.0.0.0/0"]
         description = "Allow incoming HTTP traffic from anywhere"
     }
-    
     ingress {
         from_port = 443
         to_port = 443
@@ -21,26 +19,25 @@ resource "aws_security_group" "LoadBalancerSG"
         cidr_blocks = ["0.0.0.0/0"]
         description = "Allow incoming HTTPS traffic from anywhere"
     }
-
-    egress {
-        from_port = 80
-        to_port = 80
-        protocol = "TCP"
-        security_groups = ["${aws_security_group.WebserverSG.id}"]
-    }
-
+    # egress {
+    #     from_port = 80
+    #     to_port = 80
+    #     protocol = "TCP"
+    #     security_groups = ["${aws_security_group.WebserverSG.id}"]
+    # }
     egress {
         from_port = 8080
         to_port = 8080
         protocol = "TCP"
-        security_groups = ["${aws_security_group.WebserverSG.id}"]
+        cidr_blocks = ["0.0.0.0/0"]
+        #security_groups = ["${aws_security_group.WebserverSG.id}"]
     }
-    egress {
-        from_port = 443
-        to_port = 443
-        protocol = "TCP"
-        security_groups = ["${aws_security_group.WebserverSG.id}"]
-    }
+    # egress {
+    #     from_port = 443
+    #     to_port = 443
+    #     protocol = "TCP"
+    #     security_groups = ["${aws_security_group.WebserverSG.id}"]
+    # }
 
     tags
     {
