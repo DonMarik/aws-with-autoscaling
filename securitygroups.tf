@@ -58,7 +58,15 @@ resource "aws_security_group" "WebserverSG"
         protocol = "TCP"
         cidr_blocks = ["${var.mgmt_ips}"]
         #security_groups = ["${aws_security_group.bastionhostSG.id}"]
-        description = "Allow incoming SSH traffic from Bastion Host"
+        description = "Allow incoming SSH traffic"
+    }
+    ingress {
+        from_port = "${var.server_port}"
+        to_port = "${var.server_port}"
+        protocol = "TCP"
+        cidr_blocks = ["${var.mgmt_ips}"]
+        #security_groups = ["${aws_security_group.bastionhostSG.id}"]
+        description = "Allow incoming SSH traffic"
     }
     ingress {
       from_port = -1
