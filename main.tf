@@ -63,6 +63,7 @@ resource "aws_security_group" "instance" {
 }
 
 resource "aws_launch_configuration" "ec2-webserver" {
+  name = "ec2-webserver"
   image_id = "${lookup(var.aws_amis, var.region)}"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.ma-keypair.key_name}"
