@@ -56,14 +56,16 @@ resource "aws_security_group" "WebserverSG"
         from_port = 22
         to_port = 22
         protocol = "TCP"
-        security_groups = ["${aws_security_group.bastionhostSG.id}"]
+        cidr_blocks = ["0.0.0.0/0"]
+        #security_groups = ["${aws_security_group.bastionhostSG.id}"]
         description = "Allow incoming SSH traffic from Bastion Host"
     }
     ingress {
       from_port = -1
       to_port = -1
       protocol = "ICMP"
-      security_groups = ["${aws_security_group.bastionhostSG.id}"]
+      cidr_blocks = ["0.0.0.0/0"]
+      #security_groups = ["${aws_security_group.bastionhostSG.id}"]
       description = "Allow incoming ICMP from management IPs"
     }
     # egress {

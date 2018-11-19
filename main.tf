@@ -81,7 +81,7 @@ resource "aws_launch_configuration" "ec2-webserver" {
 }
 
 resource "aws_autoscaling_group" "ma_ec2_webserver" {
-  launch_configuration = "ec2-webserver"
+  launch_configuration = "${aws_launch_configuration.ec2-webserver.name}"
   #availability_zones = ["${data.aws_availability_zones.all.names}"]
   #obsolete availability_zones = ["eu-central-1a", "eu-central-1b"]
   vpc_zone_identifier = ["${aws_subnet.pub-web-az-a.id}", "${aws_subnet.pub-web-az-b.id}"]
